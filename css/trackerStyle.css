@@ -105,6 +105,7 @@ header {
 	min-width: 300px;
 	position: absolute;
 	left: 65vw;
+	background: #000;
 }
 
 header::after {

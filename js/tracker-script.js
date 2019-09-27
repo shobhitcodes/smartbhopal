@@ -1,7 +1,7 @@
 //Global variables --start
 
 let defaultMapOptions = {
-	center: {lat: 18.5204303, lng:73.85674369999992}, //Location - Pune
+	center: {lat: 23.257944606707984, lng:77.41329458801549}, //Location - Bhopal
 	zoom: 14,
 	clickableIcons: false,
 	disableDefaultUI: true,
@@ -136,7 +136,7 @@ const initMaterialize = () => {
 };
 
 //To initialize tabs for passed element
-const initTabs = (ele,swipe) => swipe ? ele.tabs({swipeable: true, onShow: tab => onTabChange(tab)}) : ele.tabs();
+const initTabs = (ele,swipe) => swipe ? ele.tabs({swipeable: true}) : ele.tabs();
 
 //To initialize tooltip for passed element
 const initTooltip = ele => ele.tooltip();
@@ -145,13 +145,13 @@ const initTooltip = ele => ele.tooltip();
 const initSelect = ele => ele.formSelect();
 
 //Executes on a tab change
-const onTabChange = tab => {
-	if(tab.id === "tracker-op-2") {
-		setCheckpointType();
-	} else {
-		removeAddCheckpoint();
-	}
-};
+// const onTabChange = tab => {
+// 	if(tab.id === "tracker-op-2") {
+// 		setCheckpointType();
+// 	} else {
+// 		removeAddCheckpoint();
+// 	}
+// };
 
 //Materialize Component Methods --end
 
@@ -160,18 +160,18 @@ const onTabChange = tab => {
 
 //Initializes and displays google map 
 const initGoogleMap = () => {
-	if(googleMap === undefined) {
+	// if(googleMap === undefined) {
 		googleMap = new google.maps.Map(document.getElementById("map-canvas"), defaultMapOptions);
-	}
-	let activeMap = getActiveMap();
-	if(activeMap !== undefined) {
-		googleMap.setOptions({
-			center: {lat: activeMap.center.lat, lng: activeMap.center.lng},
-			zoom: activeMap.zoom,
-			draggable: activeMap.draggable
-		});
-		$("#map-canvas").removeClass("d-none");
-	}
+	// }
+	// let activeMap = getActiveMap();
+	// if(activeMap !== undefined) {
+	// 	googleMap.setOptions({
+	// 		center: {lat: activeMap.center.lat, lng: activeMap.center.lng},
+	// 		zoom: activeMap.zoom,
+	// 		draggable: activeMap.draggable
+	// 	});
+	// 	$("#map-canvas").removeClass("d-none");
+	// }
 };
 
 //Activates Google map navigation by places
@@ -499,6 +499,7 @@ const addCheckpointItem = (id, title, position) =>
 
 //Main function(executes when DOM has been loaded) - execution starts here
 $(document).ready(() => {
+	initGoogleMap();
 	setInitialLayer();
 	pushDefaultLayers();
 	fetchData();
@@ -506,7 +507,7 @@ $(document).ready(() => {
 	initMaterialize();
 	setTabs();
 	initGoogleMap();
-	activatePlaceAutocomplete();
+	// activatePlaceAutocomplete();
 	setLayer();
 	setCheckpoint();
 	fetchCheckpoints();
